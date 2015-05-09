@@ -1,15 +1,21 @@
 class TopicsScreen < PM::TableScreen
   attr_reader :topics
 
-  title ""
+  refreshable
+  title "RubyMotion Community"
   stylesheet TopicsScreenStylesheet
 
   def on_load
     @topics = []
+    start_refreshing
+  end
+
+  def start_refreshing
     fetcher = DiscourseFetcher.new("latest.json")
 
     fetcher.fetch do |topics_json|
       @topics = Topic.build_many(topics_json)
+      end_refreshing
       update_table_data
     end
   end
@@ -26,6 +32,10 @@ class TopicsScreen < PM::TableScreen
         }
       end
     }]
+  end
+
+  def on_refresh
+    start_refreshing
   end
 
   def open_profile(data)
