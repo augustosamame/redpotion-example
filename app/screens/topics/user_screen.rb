@@ -21,12 +21,14 @@ class UserScreen < PM::Screen
 
     find(:name).data(state.attr(:name))
     find(:avatar_image).data(state.attr(:avatar))
+    find(:details_title).data(state.attr(:details_title))
     find(:last_seen_at).data(state.attr(:last_seen_at))
   end
 
   def build_initial_ui
     append(UIImageView, :avatar_image)
     append(UILabel, :name)
+    append(UILabel, :details_title)
     append(UILabel, :last_seen_at)
 
     @ui_built = true
@@ -40,7 +42,8 @@ class UserScreen < PM::Screen
 
       state.name = user.name
       state.avatar = user.avatar
-      state.last_seen_at = "Last 👀 : #{datetime_long(user.last_seen_at)}"
+      state.last_seen_at = "Last Seen on #{datetime_long(user.last_seen_at)}"
+      state.details_title = "User Information"
 
       set_state
     end

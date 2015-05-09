@@ -18,24 +18,23 @@ class UserScreenStylesheet < ApplicationStylesheet
   end
 
   def last_seen_at(style)
+    user_detail_item(style)
+  end
+
+  def details_title(style)
+    user_detail_item(style)
+    style.text_alignment = :left
+    style.font = UIFont.boldSystemFontOfSize(20.0)
+    style.color = color.black
+  end
+
+  def user_detail_item(style)
     style.frame = {
       left: 20,
       from_right: 20,
-      below_previous: 40,
+      below_previous: 30,
       height: 50
     }
-  end
-
-  def last_post_at(style)
-    style.frame = {
-      left: 20,
-      from_right: 20,
-      top: 250,
-      height: 50
-    }
-  end
-
-  def joined_at(style)
   end
 
   def avatar_image(style)
@@ -45,5 +44,7 @@ class UserScreenStylesheet < ApplicationStylesheet
       below_previous: 90,
       height: 150,
     }
+
+    style.corner_radius = 30
   end
 end
