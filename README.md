@@ -2,7 +2,7 @@ RedPotion
 ===================
 
 This is an example application that was used in my talk at the London RubyMotion
-meet up. RedPotions aims to provide a clean and organised structure to iOS
+meet up. RedPotion aims to provide a clean and organised structure to iOS
 application built with RubyMotion. To do this, it provides a set of clear
 conventions and commonly used gems. It's also extremelly flexible, allowing the
 developer to fallback to the Cocoa API when needed.
