@@ -3,16 +3,16 @@ class UserScreenState
 
   attr_accessor :avatar, :name, :last_seen_at, :details_title
 
-  def attr(attribute)
+  def get(attribute)
     self.send(attribute) || defaults[attribute]
   end
 
   def defaults
     {
-      name: "Loading...",
       last_seen_at: "",
-      avatar: rmq.image.resource("default-avatar"),
-      details_title: ""
+      details_title: "",
+      name: "Loading...",
+      avatar: rmq.image.resource("default-avatar")
     }
   end
 end

@@ -1,7 +1,6 @@
 class UserScreen < PM::Screen
   include ViewHelpers
 
-  attr_reader :state
   attr_accessor :topic
 
   stylesheet UserScreenStylesheet
@@ -11,18 +10,17 @@ class UserScreen < PM::Screen
   end
 
   def on_load
-    @state = UserScreenState.new
-    set_state
+    render(UserScreenState.new)
     fetch_user
   end
 
-  def set_state
+  def render(state)
     build_initial_ui unless @ui_built
 
-    find(:name).data(state.attr(:name))
-    find(:avatar_image).data(state.attr(:avatar))
-    find(:details_title).data(state.attr(:details_title))
-    find(:last_seen_at).data(state.attr(:last_seen_at))
+    find(:name).data(state.get(:name))
+    find(:avatar_image).data(state.get(:avatar))
+    find(:last_seen_at).data(state.get(:last_seen_at))
+    find(:details_title).data(state.get(:details_title))
   end
 
   def build_initial_ui
@@ -40,12 +38,13 @@ class UserScreen < PM::Screen
     fetcher.fetch do |response|
       user = User.new(response[:user])
 
+      state = UserScreenState.new
       state.name = user.name
       state.avatar = user.avatar
       state.last_seen_at = "Last Seen on #{datetime_long(user.last_seen_at)}"
       state.details_title = "User Information"
 
-      set_state
+      render(state)
     end
   end
 end
