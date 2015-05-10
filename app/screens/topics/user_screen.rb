@@ -37,14 +37,17 @@ class UserScreen < PM::Screen
 
     fetcher.fetch do |response|
       user = User.new(response[:user])
-
-      state = UserScreenState.new
-      state.name = user.name
-      state.avatar = user.avatar
-      state.last_seen_at = "Last Seen on #{datetime_long(user.last_seen_at)}"
-      state.details_title = "User Information"
-
+      state = build_state_with_user(user)
       render(state)
     end
+  end
+
+  def build_state_with_user(user)
+    state = UserScreenState.new
+    state.name = user.name
+    state.avatar = user.avatar
+    state.last_seen_at = "Last Seen on #{datetime_long(user.last_seen_at)}"
+    state.details_title = "User Information"
+    state
   end
 end

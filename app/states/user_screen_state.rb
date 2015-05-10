@@ -1,6 +1,4 @@
 class UserScreenState
-  include ViewHelpers
-
   attr_accessor :avatar, :name, :last_seen_at, :details_title
 
   def get(attribute)
